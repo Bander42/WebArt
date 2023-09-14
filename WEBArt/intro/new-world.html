@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <title>New-World</title>
+</head>
+<body>
+    <header>
+        
+    
+        <div id="breadcrumbs">
+            <ul>
+                <li><a href="/"><img src="\intro\IMG\Tag.jpg" height="70px" alt="tag"></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="new-world-order.html">New World Order</a></li>
+                <li id="current-page-title"></li>
+            </ul>
+        </div>
+    
+    
+    
+    
+        </header>
+
+
+        <div id="fullscreen-container">
+            <img id="fullscreen-image" src="" alt="Fullscreen Image">
+        </div>
+
+   <!--img gallery sorted...-->
+   <div id="image-gallery" class="masonry">
+    <script>
+        const currentPageTitle = document.title;
+        document.getElementById('current-page-title').textContent = currentPageTitle;
+    
+        const imageGallery = document.getElementById('image-gallery');
+        const imagePath = 'IMG/new-world-order/new-world/';
+        const imageCount = 43;
+    
+        const imageUrls = [];
+        for (let i = 1; i <= imageCount; i++) {
+            const imageUrl = `${imagePath}new-world-${i}.jpg`;
+            imageUrls.push({ url: imageUrl, count: i });
+        }
+    
+        imageUrls.sort((a, b) => a.count - b.count);
+    
+        const loadImage = (url) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = url;
+            });
+        };
+
+        // !!!Randomize Array!!!
+        // const shuffleArray = (array) => {
+        //         for (let i = array.length - 1; i > 0; i--) {
+        //             const j = Math.floor(Math.random() * (i + 1));
+        //             [array[i], array[j]] = [array[j], array[i]]; 
+        //         }
+        //     };
+        //     shuffleArray(imageUrls);
+    
+        const preloadImages = async () => {
+            for (const imageUrlObj of imageUrls) {
+                try {
+                    const img = await loadImage(imageUrlObj.url);
+    
+                    // Create an image container
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'image-container';
+                    
+                    // Append the image to the container
+                    imageContainer.appendChild(img);
+    
+                    // Append the image container to the image gallery
+                    imageGallery.appendChild(imageContainer);
+    
+                    // Calculate and set grid row heights based on image height
+                    const imgHeight = img.clientHeight;
+                    const numRows = Math.ceil(imgHeight / 100); // 20 is the desired vertical spacing
+                    imageContainer.style.gridRowEnd = `span ${numRows}`;
+                } catch (error) {
+                    console.error('Error loading image:', error);
+                }
+            }
+        };
+    
+        preloadImages();
+
+
+        // ON-Click fullscreen
+
+const fullscreenContainer = document.getElementById('fullscreen-container');
+const fullscreenImage = document.getElementById('fullscreen-image');
+
+const imageContainers = document.querySelectorAll('.image-container');
+imageContainers.forEach((container) => {
+    container.addEventListener('click', () => {
+        
+        const clickedImageSrc = container.querySelector('img').src;
+
+         fullscreenImage.src = clickedImageSrc;
+
+        fullscreenContainer.style.display = 'block';
+
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+fullscreenContainer.addEventListener('click', () => {
+    fullscreenContainer.style.display = 'none';
+
+    document.body.style.overflow = 'auto';
+});
+    </script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+/* Breadcrumbs */
+#breadcrumbs {
+    font-size: 16px;
+}
+
+#breadcrumbs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#breadcrumbs li {
+    display: inline;
+    margin-right: 10px;
+}
+
+#breadcrumbs li:last-child {
+    font-weight: bold; /* Style the last item differently to indicate the current page */
+}
+
+
+/* text fonts */
+
+a {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    text-decoration: none; /* Remove underlines from links */
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+
+
+/* Spacers/margins */
+
+.table-mid {
+    width: 500px;
+}
+
+#left-margin {
+    margin-left: 100px;
+}

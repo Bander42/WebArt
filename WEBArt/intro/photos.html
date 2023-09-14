@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="photos.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Photos</title>
+</head>
+<body>
+    <header>
+        
+    
+        <div id="breadcrumbs">
+            <ul>
+                <li><a href="/"><img src="\intro\IMG\Tag.jpg" height="70px" alt="tag"></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li id="current-page-title"></li>
+            </ul>
+        </div>
+    
+    
+    
+    
+        </header>
+   
+    <div id="image-gallery"> 
+
+    <script>
+
+  
+  const currentPageTitle = document.title;
+    
+   
+    document.getElementById('current-page-title').textContent = currentPageTitle;
+
+
+
+    const imageCount = 5000;
+    const imageGallery = document.getElementById('image-gallery');
+     
+    const imagePath1 = 'IMG/security/';
+    const imagePath2 = 'IMG/chicago/';
+   
+ 
+        const preloadImages = () => {
+            for (let i = 1; i <= imageCount; i++) {
+
+                var imageUrl = `${imagePath1}security-${i}.jpg`;
+                var imageUrl = `${imagePath2}chicago-${i}.jpg`;
+                const img = new Image();
+
+                img.onload = () => {
+                    
+                    imageGallery.appendChild(img);
+                };
+
+                img.src = imageUrl;
+            }
+        }
+
+      
+  
+  
+  
+  
+      
+    
+  </script>
+  
+  
+  
+  </script> 
+     
+    </div>
+</body>
+</html>

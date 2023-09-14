@@ -1,0 +1,38 @@
+h1 {
+    margin: 0 auto;
+}
+body {
+    padding: 10px;
+    margin: 0 auto;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+.center {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    vertical-align: center;
+}
+
+a {
+    color: rgb(8, 8, 8);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: rgb(33, 33, 33);
+
+
+}
+
+nav {
+    display: inline;
+    margin: auto;
+}
+
+.responsive-image{
+max-width: 100%;
+
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="security.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Security</title>
+</head>
+<body>
+    <header>
+        
+    
+        <div id="breadcrumbs">
+            <ul>
+                <li><a href="/"><img src="\intro\IMG\Tag.jpg" height="70px" alt="tag"></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li id="current-page-title"></li>
+            </ul>
+        </div>
+    
+    
+    
+    
+        </header>
+   
+
+      <div id="gallery" class="masonry"></div>
+
+  
+      <script>
+        const currentPageTitle = document.title;
+        document.getElementById('current-page-title').textContent = currentPageTitle;
+    
+        // Function to load and parse XMP data from an image
+        async function extractXMPData(imagePath) {
+            const response = await fetch(imagePath);
+            const blob = await response.blob();
+            const buffer = await blob.arrayBuffer();
+            const parser = require('exif-parser').create(buffer);
+            const result = parser.parse();
+            console.log(result.tags); // This will log XMP data
+            return result.tags;
+        }
+  
+          // Function to filter and display images based on XMP data
+          async function filterAndDisplayImages(galleryId, folderPath, criteria) {
+              const gallery = document.getElementById(galleryId);
+            
+              const imageCount = 43; // Adjust this to the number of images in your folder
+              const images = [];
+  
+              // Loop through image files
+              for (let i = 1; i <= imageCount; i++) {
+                  const imagePath = `${folderPath}security-${i}.jpg`;
+  
+                  try {
+                      const xmpData = await extractXMPData(imagePath);
+  
+                      // Check if the image meets the criteria
+                      if (criteria.some(tag => xmpData.includes(tag))) {
+                          const img = new Image();
+                          img.src = imagePath;
+  
+                          const imageContainer = document.createElement('div');
+                          imageContainer.className = 'image-container';
+                          imageContainer.appendChild(img);
+  
+                          gallery.appendChild(imageContainer);
+                      }
+                  } catch (error) {
+                      console.error('Error loading image:', error);
+                  }
+              }
+          }
+  
+          // Define your filtering criteria (tags) for each gallery
+          const securityCriteria = ['security'];
+          const chicagoCriteria = ['chicago'];
+  
+          // Specify the folder path where your images are located
+          const imageFolderPath = '/intro/IMG/security/';
+  
+          // Call the function to filter and display images for each gallery
+          filterAndDisplayImages('gallery', imageFolderPath, securityCriteria);
+          filterAndDisplayImages('gallery-chicago', imageFolderPath, chicagoCriteria);
+          // Add more galleries and criteria as needed
+      </script>
+      </div>
+</body>
+</html>

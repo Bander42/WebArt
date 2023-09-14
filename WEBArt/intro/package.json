@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "exif-parser": "^0.1.12",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "packery": "^2.1.2",
+    "path": "^0.12.7"
+  }
+}

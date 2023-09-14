@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Chicago</title>
+</head>
+<body>
+    <header>
+        
+    
+        <div id="breadcrumbs">
+            <ul>
+                <li><a href="/"><img src="\intro\IMG\Tag.jpg" height="70px" alt="tag"></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li id="current-page-title"></li>
+            </ul>
+        </div>
+    
+    
+    
+    
+        </header>
+   
+    <!--img gallery sorted...-->
+    <div id="image-gallery" class="masonry">
+        <script>
+            const currentPageTitle = document.title;
+            document.getElementById('current-page-title').textContent = currentPageTitle;
+        
+            const imageGallery = document.getElementById('image-gallery');
+            const imagePath = 'IMG/chicago/';
+            const imageCount = 500;
+        
+            const imageUrls = [];
+            for (let i = 1; i <= imageCount; i++) {
+                const imageUrl = `${imagePath}chicago-${i}.jpg`;
+                imageUrls.push({ url: imageUrl, count: i });
+            }
+        
+            imageUrls.sort((a, b) => a.count - b.count);
+        
+            const loadImage = (url) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = reject;
+                    img.src = url;
+                });
+            };
+    
+            // !!!Randomize Array!!!
+            const shuffleArray = (array) => {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]]; 
+                    }
+                };
+                shuffleArray(imageUrls);
+        
+            const preloadImages = async () => {
+                for (const imageUrlObj of imageUrls) {
+                    try {
+                        const img = await loadImage(imageUrlObj.url);
+        
+                        
+                        const imageContainer = document.createElement('div');
+                        imageContainer.className = 'image-container';
+                        
+                        
+                        imageContainer.appendChild(img);
+        
+                 
+                        imageGallery.appendChild(imageContainer);
+        
+                        
+                        const imgHeight = img.clientHeight;
+                        const numRows = Math.ceil(imgHeight / 100); 
+                        imageContainer.style.gridRowEnd = `span ${numRows}`;
+                    } catch (error) {
+                        console.error('Error loading image:', error);
+                    }
+                }
+            };
+        
+            preloadImages();
+        </script>
+</body>
+</html>

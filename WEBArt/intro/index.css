@@ -1,0 +1,76 @@
+
+
+
+body {
+    background-image: url('IMG/Artboard 1.jpg');
+    position: sticky;
+    background-size: 3000px;
+    min-width: 4000px;
+    min-height: 4000px;
+    background-repeat: no-repeat; 
+}
+
+
+
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+}
+
+
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 300px;
+    font-weight: bolder; 
+    color: #cbb792;
+}
+
+h2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+   
+}
+
+
+a {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+}
+
+.ul{
+    text-decoration: underline;
+}
+
+.content {
+    padding: 20px;
+}
+
+
+.sticky-image {
+    position: sticky;
+    top: 20px; 
+    width: 2000px; 
+}
+
+
+.top-pad {
+    padding: 549px;
+}
+
+.left-pad {
+    width: 390px;
+}
+
+
+.table-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-data td {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+     
+}
